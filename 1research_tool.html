@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservoir Monitoring System - Research Tools</title>
+    <link rel="stylesheet" href="1style.css">
+</head>
+<body>
+    <header>
+        <h1>National Reservoir Monitoring System</h1>
+        <nav>
+            <ul>
+                <li><a href="#research-tools">Research Tools</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Research Tools Section -->
+        <section id="research-tools">
+            <h2>Research Tools</h2>
+            <!-- Form to Upload Documents -->
+            <form action="1upload_document.php" method="POST" enctype="multipart/form-data" class="upload-form">
+                <div class="form-group">
+                    <label for="doc-title">Document Title:</label>
+                    <input type="text" id="doc-title" name="doc-title" placeholder="Enter document title" required>
+                </div>
+                <div class="form-group">
+                    <label for="doc-file">Upload Document:</label>
+                    <input type="file" id="doc-file" name="doc-file" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="technology">Technology</option>
+                        <option value="research">Research</option>
+                        <option value="policy">Policy</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Upload</button>
+            </form>
+
+            <h3>Uploaded Documents</h3>
+            <ul class="document-list">
+                <?php include '1fetch_documents.php'; ?>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 National Reservoir Monitoring System</p>
+    </footer>
+</body>
+</html>

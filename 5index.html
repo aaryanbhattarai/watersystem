@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Tracking</title>
+    <link rel="stylesheet" href="3styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Challenge Tracking Dashboard</h1>
+
+        <!-- Add Challenge Form -->
+        <form action="5add_challenge.php" method="POST">
+            <input type="text" name="name" placeholder="Challenge Name" required>
+            <textarea name="description" placeholder="Challenge Description" required></textarea>
+            <button type="submit">Add Challenge</button>
+        </form>
+
+        <!-- Display Challenges -->
+        <h2>Challenges</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Challenge</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="challenge-table">
+                <!-- Dynamic content goes here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

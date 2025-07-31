@@ -1,16 +1,18 @@
 <?php
-// Include the database connection file
-include 'database.php';
+// index.php
+// Landing page for the Inventory Demand Forecasting system.
 
-// Fetch reservoir data from the database
-$query = "SELECT name, level, capacity FROM reservoirs ORDER BY name";
-$result = mysqli_query($conn, $query);
+require_once 'functions.php'; // Include functions for session and redirect
 
-// Prepare data for the frontend
-$reservoirData = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $reservoirData[] = $row;
+// Start a secure session
+start_secure_session();
+
+// Check if the user is already logged in
+if (is_logged_in()) {
+    // If logged in, redirect to the dashboard
+    redirect('dashboard.php');
 }
+// If not logged in, the HTML below will be shown
 ?>
 
 <!DOCTYPE html>
@@ -18,40 +20,34 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservoir Monitoring Dashboard</title>
-    <link rel="stylesheet" href="3styles.css">
+    <title>Inventory Demand Forecasting - Welcome</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <!-- No inline styles needed as they are in styles.css now -->
 </head>
 <body>
-    <header>
-        <h1>Reservoir Monitoring Dashboard</h1>
-    </header>
 
-    <section class="dashboard">
-        <div class="container">
-            <h2>Reservoir Levels and Capacities</h2>
-            <div class="chart">
-                <!-- Loop through the data and display each reservoir as a bar -->
-                <?php foreach ($reservoirData as $reservoir): ?>
-                    <div class="bar-container">
-                        <div 
-                            class="bar level" 
-                            style="height: <?php echo ($reservoir['level'] / $reservoir['capacity']) * 100; ?>%;"
-                            title="Level: <?php echo $reservoir['level']; ?> units">
-                        </div>
-                        <div 
-                            class="bar capacity" 
-                            style="height: 100%;"
-                            title="Capacity: <?php echo $reservoir['capacity']; ?> units">
-                        </div>
-                        <p><?php echo htmlspecialchars($reservoir['name']); ?></p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </section>
+<!-- Navigation Bar with Logo -->
+<nav class="navbar">
+    <ul>
+        <!-- Logo and Brand -->
+        <li class="navbar-brand">
+            <img src="logo.jpg" alt="Inventory Forecast Logo" class="navbar-logo">
+            <span class="brand-text">Inventory Forecast</span>
+        </li>
+        <!-- Navigation Links (if any for non-logged-in users, e.g., about) -->
+        <!-- For index, main actions are Login/Register buttons below -->
+    </ul>
+</nav>
 
-    <footer>
-        <p>© 2024 Reservoir Monitoring Project</p>
-    </footer>
+<div class="main-content">
+    <div class="welcome-section">
+        <h1>Welcome to Inventory Demand Forecasting</h1>
+        <p>Predict your inventory needs with machine learning.</p>
+        <p>Please log in or register to continue.</p>
+        <a href="login.php" class="btn btn-primary">Login</a>
+        <a href="register.php" class="btn btn-secondary">Register</a>
+    </div>
+</div>
+
 </body>
 </html>
